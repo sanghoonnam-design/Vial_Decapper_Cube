@@ -11,7 +11,7 @@
 #include "XGlobal.h"
 #include "_01_HW_and_Device.h"
 
-#include "CDecap.h"
+#include "CT_Handler.h"
 
 // 시스템 DB의 헤더 부분, 향후 확장 가능하도록 미리 정의
 // 4 * 16 = 64 Bytes 로 설계함. => 고정
@@ -58,7 +58,6 @@ typedef struct
     int errorCode;
 
     tsXSL_Decapper Decapper; 				//is homed 과 같은 형재 상태 확인
-    xSLecapping_Sensor CDecapping_Sensor;	//각 센서의 데이터 데이터 확인
     xSLecapping_MotorRun xZ_Motor_Run;		//Z축 모터의 움직임 확인
     xSLecapping_MotorRun xR_Motor_Run;		//R축 모터의 움직임 확인
 

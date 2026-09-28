@@ -332,25 +332,30 @@ void CMD_Handle_Print_SL(const tsXParsedData *parsedData, U08 useTCP)
         xcprintf(ANSI_TX_LightGreen);
         xprintf("\t----------------------------------------------------------------------");
 
-        xprintf("\t[ xSL.Decapper ]");
+        xprintf("\t[ xSL.Decapper State ]");
         xprintf("\t  %-42s : %10d", "xSL.Decapper.Cap_is", xSL.Decapper.Cap_is);
         xprintf("\t  %-42s : %10d", "xSL.Decapper.Body_is", xSL.Decapper.Body_is);
-        xprintf("\t  %-42s : %10d", "xSL.Decapper.Z_HL_isError", xSL.Decapper.Z_HL_isError);
-        xprintf("\t  %-42s : %10d", "xSL.Decapper.Y_HL_isError", xSL.Decapper.Y_HL_isError);
-        xprintf("\t  %-42s : %10d", "xSL.Decapper.CT_Cap_Grip_isError", xSL.Decapper.CT_Cap_Grip_isError);
-        xprintf("\t  %-42s : %10d", "xSL.Decapper.CT_Body_Grip_isError", xSL.Decapper.CT_Body_Grip_isError);
+        xprintf("\t----------------------------------------------------------------------");
+        xprintf("\t[ xSL.Decapper Sensor ]");
+        xprintf("\t  %-42s : %10d", "xSL.Decapper.CT_Cap_Grip_Open", xSL.Decapper.CT_Cap_Grip_Open);
+        xprintf("\t  %-42s : %10d", "xSL.Decapper.CT_Cap_Grip_Close", xSL.Decapper.CT_Cap_Grip_Close);
+        xprintf("\t  %-42s : %10d", "xSL.Decapper.CT_Body_Middle_Grip_Open", xSL.Decapper.CT_Body_Middle_Grip_Open);
+        xprintf("\t  %-42s : %10d", "xSL.Decapper.CT_Body_Middle_Grip_Close", xSL.Decapper.CT_Body_Middle_Grip_Close);
+        xprintf("\t  %-42s : %10d", "xSL.Decapper.CT_Body_Top_Grip_Open", xSL.Decapper.CT_Body_Top_Grip_Open);
+        xprintf("\t  %-42s : %10d", "xSL.Decapper.CT_Body_Top_Grip_Close", xSL.Decapper.CT_Body_Top_Grip_Close);
+        xprintf("\t  %-42s : %10d", "xSL.Decapper.Z2_H_Limit", xSL.Decapper.Z2_H_Limit);
+        xprintf("\t  %-42s : %10d", "xSL.Decapper.Z2_L_Limit", xSL.Decapper.Z2_L_Limit);
+        xprintf("\t  %-42s : %10d", "xSL.Decapper.Z_L_Limit", xSL.Decapper.Z_L_Limit);
+        xprintf("\t  %-42s : %10d", "xSL.Decapper.Y_H_Limit", xSL.Decapper.Y_H_Limit);
+        xprintf("\t  %-42s : %10d", "xSL.Decapper.Y_L_Limit", xSL.Decapper.Y_L_Limit);
 
         xprintf("\t----------------------------------------------------------------------");
-        xprintf("\t[ xSL.CDecapping_Sensor ]");
-        xprintf("\t  %-42s : %10d", "xSL.CDecapping_Sensor.Z_H_Limit_Sensor", xSL.CDecapping_Sensor.Z_H_Limit_Sensor);
-        xprintf("\t  %-42s : %10d", "xSL.CDecapping_Sensor.Z_L_Limit_Sensor", xSL.CDecapping_Sensor.Z_L_Limit_Sensor);
-        xprintf("\t  %-42s : %10d", "xSL.CDecapping_Sensor.Y_H_Limit_Sensor", xSL.CDecapping_Sensor.Y_H_Limit_Sensor);
-        xprintf("\t  %-42s : %10d", "xSL.CDecapping_Sensor.Y_L_Limit_Sensor", xSL.CDecapping_Sensor.Y_L_Limit_Sensor);
-        xprintf("\t  %-42s : %10d", "xSL.CDecapping_Sensor.CT_Body_Grip_Detect_Open", xSL.CDecapping_Sensor.CT_Body_Grip_Detect_Open);
-        xprintf("\t  %-42s : %10d", "xSL.CDecapping_Sensor.CT_Body_Grip_Detect_Close", xSL.CDecapping_Sensor.CT_Body_Grip_Detect_Close);
-        xprintf("\t  %-42s : %10d", "xSL.CDecapping_Sensor.CT_Cap_Grip_Detect_Open", xSL.CDecapping_Sensor.CT_Cap_Grip_Detect_Open);
-        xprintf("\t  %-42s : %10d", "xSL.CDecapping_Sensor.CT_Cap_Grip_Detect_Close", xSL.CDecapping_Sensor.CT_Cap_Grip_Detect_Close);
-        xprintf("\t  %-42s : %10d", "xSL.CDecapping_Sensor.CT_Detect_Sensor", xSL.CDecapping_Sensor.CT_Detect_Sensor);
+        xprintf("\t[ xSL.Decapper Diagnosis ]");
+        xprintf("\t  %-42s : %10d", "xSL.Decapper.Z2_HL_isError", xSL.Decapper.Z2_HL_isError);
+        xprintf("\t  %-42s : %10d", "xSL.Decapper.Y_HL_isError", xSL.Decapper.Y_HL_isError);
+        xprintf("\t  %-42s : %10d", "xSL.Decapper.CT_Cap_Grip_isError", xSL.Decapper.CT_Cap_Grip_isError);
+        xprintf("\t  %-42s : %10d", "xSL.Decapper.CT_Body_Middle_Grip_isError", xSL.Decapper.CT_Body_Middle_Grip_isError);
+        xprintf("\t  %-42s : %10d", "xSL.Decapper.CT_Body_Top_Grip_isError", xSL.Decapper.CT_Body_Top_Grip_isError);
 
         xprintf("\t----------------------------------------------------------------------");
         xprintf("\t[ Motor Run ]");

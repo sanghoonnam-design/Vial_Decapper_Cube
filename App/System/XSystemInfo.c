@@ -151,14 +151,10 @@ const char *GetSystemTypeString(void)
 
 const char *GetModelTypeString(void){
     switch (GetModelType()){
-    case MODEL_05:
-        return "MODEL-05";
-    case MODEL_15:
-        return "MODEL-15";
-    case MODEL_25:
-        return "MODEL-25";
-    case MODEL_50:
-        return "MODEL-50";
+    case MODEL_TUBE:
+        return "TUBE";
+    case MODEL_50ML:
+        return "50mL";
     default:
         return "UNKNOWN";
     }

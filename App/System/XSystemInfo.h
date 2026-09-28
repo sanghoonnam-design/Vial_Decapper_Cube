@@ -25,7 +25,6 @@
 #define PL_DEFAULT_DG_CPU_TEMPERATURE_OVERHEAT_CRITERIA /* */ (80)	   // 80도 이상일 때 CPU 온도 과열로 판단하는 기준값, 단위: 섭씨도
 #define PL_DEFAULT_DG_CPU_TEMP_ALARM_INTERVAL_10msec /*    */ (__5min) // CPU 온도 과열 알람 주기, 단위: 호출 주기 기준
 
-
 //==================================================================================
 typedef enum
 {
@@ -37,7 +36,7 @@ typedef enum
 	FW_MODE_COUNT
 } teXFW_Mode;
 
-#define MODEL_NAME_STR ("Robo-C") // 시스템 모델명 문자열
+#define MODEL_NAME_STR ("HEM_CT_Handler") // 시스템 모델명 문자열
 
 #define FW_MODE_TEST (FW_MODE_IDLE)
 #define FW_MODE_MAIN_TASK_STOP (FW_MODE_TIMER_STOP)
@@ -55,7 +54,7 @@ typedef struct SystemInfoGroup
 	F32 cd_CpuTemperature;		//!> CPU 내부 온도
 								//
 	U32 pl_FW_Version;			//!> [컴파일시 정해짐] from EEPROM or SD
-	char cd_FWVersion_str[16];	//!> [컴파일시 정해짐] version 문자열로 재생성한 버전
+	char cd_FWVersion_str[20];	//!> [컴파일시 정해짐] version 문자열로 재생성한 버전
 	U08 pl_systemType;			//!> [컴파일시 정해짐] Robo-I, Robo-IS, Robo-S
 	U08 pl_modelType;			//!> [컴파일시 정해짐] 시스템별 모델 타입
 								//

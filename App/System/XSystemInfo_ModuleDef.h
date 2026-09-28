@@ -16,12 +16,12 @@
  * |  NO. |    Company    |         Model          | FW Ver. Type | Current Version   |  Description          |
  * |      |               |                        |              | (inaccurate data) |                       |
  * ===========================================================================================================
- * |    1 |               | Vial Decapper          | A            | 1.0.0A05          | 최초 버전                |
+ * |    1 |               | HEM CT Handler (TUBE)  | A            | 1.0.0A01          | 최초 버전                |
  * |----------------------------------------------------------------------------------------------------------|
  * ===========================================================================================================
  * ===========================================================================================================
  *
- * ver 1.00.00  : Vial Decapper 최초 버전, 1.0.0A05
+ * ver 1.00.00  : HEM CT Handler 최초 버전, 1.0.0A01
  * ............ :
  * ver 4.00.00  :
  *
@@ -33,53 +33,48 @@
  * 아래 코드에 직접 System Type과 Model Type을 정의하세요.
  * ********************************************************************************/
 #ifndef SYSTEM_TYPE
-#define SYSTEM_TYPE /*     */ SYS_Vial_Decapper
+#define SYSTEM_TYPE /*     */ SYS_HEM_CT_Handler
 #endif
 
 #ifndef MODEL_TYPE
-#define MODEL_TYPE /*      */ MODEL_05
+#define MODEL_TYPE /*      */ MODEL_TUBE
 #endif
 
 #define TCP_IP_ADDRESS (160) // 192.168.0.xx
 
 /** cf) 모델 설명 ===================================================================
- ** [SYS_Vial_Decapper] : Vial Decapper
- *     1) MODEL_05 : [xx.xx.xxA05], 기본 모델
- *     2) MODEL_15 : [xx.xx.xxA15]
- *     3) MODEL_25 : [xx.xx.xxA25]
- *     4) MODEL_50 : [xx.xx.xxA50]
+ ** [SYS_HEM_CT_Handler] : HEM CT Handler
+ *     1) MODEL_TUBE : [xx.xx.xxA01], TUBE 모델
+ *     2) MODEL_50ML : [xx.xx.xxA50], 50mL 모델
  * ********************************************************************************/
 
 //==================================================================================
-#define SYS_Vial_Decapper /**/ (1)
+#define SYS_HEM_CT_Handler /**/ (1)
 
-#define MODEL_05 /*        */ (5)
-#define MODEL_15 /*        */ (15)
-#define MODEL_25 /*        */ (25)
-#define MODEL_50 /*        */ (50)
+#define MODEL_TUBE /*      */ (1)
+#define MODEL_50ML /*      */ (50)
 //==================================================================================
 
 /* ---- Validation : 구성값 유효성 검사 (컴파일 타임) ---- */
 #if !defined(SYSTEM_TYPE)
 #error "[SYSTEM_TYPE] is not defined (set it above or in build settings)"
-#elif (SYSTEM_TYPE != SYS_Vial_Decapper)
+#elif (SYSTEM_TYPE != SYS_HEM_CT_Handler)
 #error "[SYSTEM_TYPE] has an unknown value (see 'System Type' list above)"
 #endif
 
 #if !defined(MODEL_TYPE)
 #error "[MODEL_TYPE] is not defined (set it above or in build settings)"
-#elif (MODEL_TYPE != MODEL_05) && (MODEL_TYPE != MODEL_15) && \
-      (MODEL_TYPE != MODEL_25) && (MODEL_TYPE != MODEL_50)
+#elif (MODEL_TYPE != MODEL_TUBE) && (MODEL_TYPE != MODEL_50ML)
 #error "[MODEL_TYPE] has an unknown value (see 'Model Type' list above)"
 #endif
 
 //==================================================================================
-#define IS_Vial_Decapper (SYSTEM_TYPE == SYS_Vial_Decapper)
+#define IS_HEM_CT_Handler (SYSTEM_TYPE == SYS_HEM_CT_Handler)
 //==================================================================================
 
 //---- SYSTEM_TYPE 문자열 자동 선택 (SYSTEM_TYPE만 바꾸면 따라옴) ----
-#if IS_Vial_Decapper
-#define SYSTEM_TYPE_STR /* */ "Vial_Decapper"
+#if IS_HEM_CT_Handler
+#define SYSTEM_TYPE_STR /* */ "HEM_CT_Handler"
 #else
 #define SYSTEM_TYPE_STR /* */ "Unknown"
 #endif
@@ -91,7 +86,7 @@
  * @note  필요없는 모듈은 주석처리 하여 사용하세요.
  *        -주석처리시 상위단 에러코드(주석과 관련된) 수정필요.
  */
-#if (IS_Vial_Decapper)
+#if (IS_HEM_CT_Handler)
 // TODO
 
 #else // [알 수 없는 모델]

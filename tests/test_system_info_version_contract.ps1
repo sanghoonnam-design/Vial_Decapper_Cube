@@ -2,6 +2,7 @@ $ErrorActionPreference = 'Stop'
 
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $moduleDef = Get-Content -Raw (Join-Path $repoRoot 'App/System/XSystemInfo_ModuleDef.h')
+$systemInfoHeader = Get-Content -Raw (Join-Path $repoRoot 'App/System/XSystemInfo.h')
 $versionDef = Get-Content -Raw (Join-Path $repoRoot 'App/Version.h')
 $systemInfo = Get-Content -Raw (Join-Path $repoRoot 'App/System/XSystemInfo.c')
 
@@ -11,23 +12,23 @@ function Require-Match([string]$Text, [string]$Pattern, [string]$Message) {
     }
 }
 
-Require-Match $moduleDef '#define\s+SYSTEM_TYPE[^\r\n]*SYS_Vial_Decapper' 'Default system type must be SYS_Vial_Decapper.'
-Require-Match $moduleDef '#define\s+MODEL_TYPE[^\r\n]*MODEL_05' 'Default model must be MODEL_05.'
-Require-Match $moduleDef '#define\s+SYS_Vial_Decapper[^\r\n]*\(1\)' 'Vial Decapper system identifier is missing.'
-Require-Match $moduleDef '#define\s+MODEL_05[^\r\n]*\(5\)' 'MODEL_05 must have numeric value 5.'
-Require-Match $moduleDef '#define\s+MODEL_15[^\r\n]*\(15\)' 'MODEL_15 must have numeric value 15.'
-Require-Match $moduleDef '#define\s+MODEL_25[^\r\n]*\(25\)' 'MODEL_25 must have numeric value 25.'
-Require-Match $moduleDef '#define\s+MODEL_50[^\r\n]*\(50\)' 'MODEL_50 must have numeric value 50.'
-Require-Match $moduleDef '#define\s+SYSTEM_TYPE_STR\s+.*"Vial_Decapper"' 'System type string must be Vial_Decapper.'
+Require-Match $moduleDef '#define\s+SYSTEM_TYPE[^\r\n]*SYS_HEM_CT_Handler' 'Default system type must be SYS_HEM_CT_Handler.'
+Require-Match $moduleDef '#define\s+MODEL_TYPE[^\r\n]*MODEL_TUBE' 'Default model must be MODEL_TUBE.'
+Require-Match $moduleDef '#define\s+SYS_HEM_CT_Handler[^\r\n]*\(1\)' 'HEM CT Handler system identifier is missing.'
+Require-Match $moduleDef '#define\s+MODEL_TUBE[^\r\n]*\(1\)' 'MODEL_TUBE must have numeric value 1.'
+Require-Match $moduleDef '#define\s+MODEL_50ML[^\r\n]*\(50\)' 'MODEL_50ML must have numeric value 50.'
+Require-Match $systemInfo 'case\s+MODEL_TUBE\s*:[\s\S]*?return\s+"TUBE"' 'Tube model must be displayed as TUBE.'
+Require-Match $systemInfo 'case\s+MODEL_50ML\s*:[\s\S]*?return\s+"50mL"' '50 mL model must be displayed as 50mL.'
+Require-Match $moduleDef '#define\s+SYSTEM_TYPE_STR\s+.*"HEM_CT_Handler"' 'System type string must be HEM_CT_Handler.'
+Require-Match $systemInfoHeader '#define\s+MODEL_NAME_STR\s+\("HEM_CT_Handler"\)' 'Model name string must be HEM_CT_Handler.'
+Require-Match $systemInfoHeader 'char\s+cd_FWVersion_str\[20\]' 'Firmware version text buffer must hold the longest formatted version.'
 Require-Match $versionDef '#define\s+FW_VERSION[^\r\n]*\(10000\)' 'Initial firmware version must be 1.0.0.'
 Require-Match $systemInfo '"%d\.%d\.%dA%02u"' 'Version formatter must produce an A-prefixed, two-digit model suffix.'
 
-foreach ($model in 5, 15, 25, 50) {
+foreach ($model in 1, 50) {
     $formatted = '1.0.0A{0:D2}' -f $model
     $expected = switch ($model) {
-        5  { '1.0.0A05' }
-        15 { '1.0.0A15' }
-        25 { '1.0.0A25' }
+        1  { '1.0.0A01' }
         50 { '1.0.0A50' }
     }
     if ($formatted -ne $expected) {

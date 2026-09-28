@@ -110,16 +110,18 @@
 #define SET_DONE(idx) (sDoneFlags |= (1UL << (idx)))
 #define CLR_DONE(idx) (sDoneFlags &= ~(1UL << (idx)))
 
-/*Sensor Parameter*/
-#define Z_H_SENSOR_PIN                 (0U)
-#define Z_L_SENSOR_PIN                 (1U)
-#define Y_H_SENSOR_PIN                 (2U)
-#define Y_L_SENSOR_PIN                 (3U)
-#define CT_BODY_GRIP_OPEN_SENSOR_PIN   (4U)
-#define CT_BODY_GRIP_CLOSE_SENSOR_PIN  (5U)
-#define CT_CAP_GRIP_OPEN_SENSOR_PIN    (6U)
-#define CT_CAP_GRIP_CLOSE_SENSOR_PIN   (7U)
-#define CT_DETECT_OPEN_SENSOR_PIN      (8U)
+/* Physical input numbers from IO List HEM_CT_Handler.xlsx (1-based sheet number - 1). */
+#define CT_CAP_GRIP_OPEN_SENSOR_PIN          (0U)
+#define CT_CAP_GRIP_CLOSE_SENSOR_PIN         (1U)
+#define CT_BODY_MIDDLE_GRIP_OPEN_SENSOR_PIN  (2U)
+#define CT_BODY_MIDDLE_GRIP_CLOSE_SENSOR_PIN (3U)
+#define CT_BODY_TOP_GRIP_OPEN_SENSOR_PIN     (4U)
+#define CT_BODY_TOP_GRIP_CLOSE_SENSOR_PIN    (5U)
+#define Z2_H_LIMIT_SENSOR_PIN                (6U)
+#define Z2_L_LIMIT_SENSOR_PIN                (7U)
+#define Z_L_LIMIT_SENSOR_PIN                 (8U)
+#define Y_H_LIMIT_SENSOR_PIN                 (9U)
+#define Y_L_LIMIT_SENSOR_PIN                 (10U)
 
 /*Y축 공압기*/
 #define Y_PIN_H_CONTROLLER		(3)
@@ -300,14 +302,27 @@ typedef struct{
 } tsXPL_Decapper;
 
 typedef struct{
+	/* Physical sensor inputs */
+	unsigned char CT_Cap_Grip_Open;
+	unsigned char CT_Cap_Grip_Close;
+	unsigned char CT_Body_Middle_Grip_Open;
+	unsigned char CT_Body_Middle_Grip_Close;
+	unsigned char CT_Body_Top_Grip_Open;
+	unsigned char CT_Body_Top_Grip_Close;
+	unsigned char Z2_H_Limit;
+	unsigned char Z2_L_Limit;
+	unsigned char Z_L_Limit;
+	unsigned char Y_H_Limit;
+	unsigned char Y_L_Limit;
 
 	bool Cap_is;
     bool Body_is;
 
-    unsigned char Z_HL_isError;
+    unsigned char Z2_HL_isError;
     unsigned char Y_HL_isError;
     unsigned char CT_Cap_Grip_isError;
-    unsigned char CT_Body_Grip_isError;
+    unsigned char CT_Body_Middle_Grip_isError;
+    unsigned char CT_Body_Top_Grip_isError;
 
     //int ForDebug[DEBUG_SL_SIZE];
 
@@ -379,18 +394,6 @@ typedef enum{
 
 } CDecapping_Statmachin_state;
 
-typedef struct{
-	unsigned char Z_H_Limit_Sensor;
-	unsigned char Z_L_Limit_Sensor;
-	unsigned char Y_H_Limit_Sensor;
-	unsigned char Y_L_Limit_Sensor;
-	unsigned char CT_Body_Grip_Detect_Open;
-	unsigned char CT_Body_Grip_Detect_Close;
-	unsigned char CT_Cap_Grip_Detect_Open;
-	unsigned char CT_Cap_Grip_Detect_Close;
-	unsigned char CT_Detect_Sensor;
-} xSLecapping_Sensor;
-
 typedef enum{
 	Ready_Idle= 0,
 	Ready_Y_L,
@@ -439,7 +442,7 @@ extern tsxCDcap xCDecap;
 void CDecap_Error_Clear(void);
 void CDecap_Init(void);
 //Update SigDate============================================
-void CDecap_Sensor_Update(void);
+void CT_Handler_Sensor_Update(void);
 void CDecap_M_S_Detect(void);
 void YZ_Motor_Status_Update(void);
 void Cap_CAP_Body_Detect_Sensor(void);
